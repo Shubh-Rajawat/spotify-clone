@@ -17,7 +17,7 @@ const NowPlaylingView = () => {
             </h5>
             <span>
               <i
-                class="fa-solid fa-xmark bg-stone-800 cursor-pointer hover:bg-stone-700 transition-all  px-2 py-1.5  rounded-full"
+                className="fa-solid fa-xmark bg-stone-800 cursor-pointer hover:bg-stone-700 transition-all  px-2 py-1.5  rounded-full"
                 onClick={ () => dispatch( nowPlayingActions.toggleNowPlaying() ) }
               ></i>
             </span>
@@ -39,8 +39,8 @@ const NowPlaylingView = () => {
               </h6>
             </div>
             <div className="flex">
-              <i class="fa-regular fa-heart mx-2 cursor-pointer text-neutral-600 hover:text-stone-300"></i>
-              <i class="fa-solid fa-ellipsis cursor-pointer text-neutral-600 hover:text-stone-300"></i>
+              <i className="fa-regular fa-heart mx-2 cursor-pointer text-neutral-600 hover:text-stone-300"></i>
+              <i className="fa-solid fa-ellipsis cursor-pointer text-neutral-600 hover:text-stone-300"></i>
             </div>
           </div>
           <div className="next-in-queue mt-8 bg-zinc-800 rounded-md py-4 px-3">
@@ -52,8 +52,8 @@ const NowPlaylingView = () => {
             </div>
             <div className="flex gap-2 group hover:bg-zinc-700 rounded-md my-2 py-2 ">
               <div className="w-8 flex justify-center items-center">
-                <i class="fa-solid fa-music group-hover:hidden inline-block "></i>
-                <i class="fa-solid fa-play group-hover:inline-block hidden"></i>
+                <i className="fa-solid fa-music group-hover:hidden inline-block "></i>
+                <i className="fa-solid fa-play group-hover:inline-block hidden"></i>
               </div>
               <div className="w-11">
                 <img

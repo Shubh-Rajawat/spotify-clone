@@ -2,14 +2,23 @@ import './App.css'
 import Routes from './Routes';
 import { PrimeReactProvider } from 'primereact/api';
 import "primereact/resources/primereact.min.css";
-// import "primereact/resources/themes/lara-light-indigo/theme.css";
-
+import {
+  QueryClient,
+  QueryClientProvider,
+} from 'react-query'
+import { BrowserRouter, useNavigate } from 'react-router-dom';
 
 
 function App() {
+
+  const queryClient = new QueryClient()
   return (
     <PrimeReactProvider>
-      <Routes />
+      <QueryClientProvider client={ queryClient }>
+        <BrowserRouter>
+          <Routes />
+        </BrowserRouter >
+      </QueryClientProvider>
     </PrimeReactProvider>
   );
 }

@@ -2,7 +2,7 @@ import React from 'react'
 
 const BottomMenu = () => {
     return (
-        <div className='sm:hidden flex  text-xs   w-full justify-around  bg-gradient-to-t from-black to-black-100 pt-2  ' >
+        <div className='sm:hidden flex  text-xs   w-screen justify-around  bg-gradient-to-t from-black to-black-100 pt-2  ' >
             <div className="home flex flex-col  items-center">
                 <i className="fa-solid fa-house text-xl text-white"></i>
                 Home

@@ -12,7 +12,7 @@ const MediaPlayer = () => {
                 <RightSongActions />
             </div>
             {/* for mobile */ }
-            <div className="song sm:hidden flex mb-5 justify-between items-center relative">
+            <div className="song sm:hidden flex mb-5 justify-around items-center relative bg-red-300">
                 <div className='flex items-center'>
                     <div className="songimg w-10">
                         <img src="https://i.scdn.co/image/ab6761610000e5ebd6a28646959575873804f23e" alt="" className='w-full' />

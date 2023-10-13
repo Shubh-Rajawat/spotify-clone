@@ -8,7 +8,7 @@ const PlaylistUser = () => {
         console.log( "right cicked" );
     };
     return (
-        <div className="playlist-wrapper ">
+        <div className="playlist-wrapper">
             <div className="">
                 <div className="playlist-banner flex gap-6 my-3 pl-4 py-4 ">
                     <div className="playlist-img w-44">
@@ -16,11 +16,11 @@ const PlaylistUser = () => {
                     </div>
                     <div className="playlist-desc flex justify-end flex-col">
                         <div className="">
-                            <p className="text-zinc-400">Playlist</p>
+                            <p className="text-zinc-400"  >Playlist</p>
                         </div>
                         <div className="mb-4">
                             <h1 className="text-7xl font-extrabold">
-                                This Is Sukhvinder Singh
+                                This Is Honey Singh
                             </h1>
                         </div>
                         <div className="my-2">
@@ -35,13 +35,13 @@ const PlaylistUser = () => {
                 <div className="play-between ml-3">
                     <div className="play my-8  mx-4">
                         <span className="px-5 py-4  rounded-full play-green hover:scale-105 cursor-pointer ">
-                            <i class="fa-solid fa-play text-xl text-black "></i>
+                            <i className="fa-solid fa-play text-xl text-black "></i>
                         </span>
                         <span className="px-5 py-4 ms-4">
                             <i class="fa-regular fa-heart text-3xl text-slate-400 hover:text-slate-200 cursor-pointer"></i>
                         </span>
                         <span className="px-5 py-4">
-                            <i class="fa-solid fa-ellipsis text-3xl text-slate-400 hover:text-slate-200 cursor-pointer"></i>
+                            <i className="fa-solid fa-ellipsis text-3xl text-slate-400 hover:text-slate-200 cursor-pointer"></i>
                         </span>
                     </div>
                 </div>

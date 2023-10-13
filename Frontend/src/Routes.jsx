@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import SideBar from './components/SideBar';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import BottomMenu from './components/BottomMenu';
@@ -9,34 +9,31 @@ import NowPlaylingView from './components/NowPlaylingView';
 import { useSelector } from 'react-redux';
 import PlaylistPage from './pages/PlaylistPage';
 import { Splitter, SplitterPanel } from 'primereact/splitter';
+import Profile from './pages/Profile';
+import Cookies from 'js-cookie';
 const PageRoutes = () => {
     const { nowPlaying } = useSelector( ( state ) => state.nowPlaying );
+    const navigate = useNavigate();
     return (
         <>
-            <BrowserRouter>
-                { window.location.pathname === "/login" || window.location.pathname === "/signup" ? null : <Splitter className="flex overflow-hidden">
-                    {/* <div > */ }
-                    <SplitterPanel className='min-w-max' size={ 15 } minSize={ 12 } ><SideBar />
-                    </SplitterPanel>
-                    <SplitterPanel size={ 85 } className='flex' >
-                        <Routes>
-                            <Route path='/login' element={ <Login /> } />
-                            <Route exact path='/' element={ <Dashboard /> } />
-                            <Route path='/playlist' element={ <PlaylistPage /> } />
-                        </Routes>
-                        { nowPlaying ? <NowPlaylingView /> : null }
-                    </SplitterPanel>
-                    {/* </div> */ }
-                </Splitter> }
 
+            <div className="flex overflow-hidden">
+                { window.location.pathname === "/login" || window.location.pathname === "/signup" || !Cookies.get( `theme` ) ? null : < div className='min-w-max' ><SideBar /></div> }
                 <Routes>
                     <Route path='/login' element={ <Login /> } />
+                    {/* <Route exact path='/' element={ !Cookies.get( `theme` ) ? <Login /> : <Dashboard /> } /> */ }
+                    <Route exact path='/' element={ <Dashboard /> } />
+                    <Route path='/playlist' element={ <PlaylistPage /> } />
+                    <Route path='/profile' element={ <Profile /> } />
                 </Routes>
-                <div className="fixed bottom-0">
-                    { ( window.location.pathname === "/login" || window.location.pathname === "/signup" ? null : <MediaPlayer /> ) }
-                    { ( window.location.pathname === "/login" || window.location.pathname === "/signup" ? null : <BottomMenu /> ) }
-                </div>
-            </BrowserRouter>
+                { nowPlaying ? <NowPlaylingView /> : null }
+            </div>
+
+            <div className="fixed bottom-0">
+                { ( window.location.pathname === "/login" || window.location.pathname === "/signup" || !Cookies.get( `theme` ) ? null : <MediaPlayer /> ) }
+                { ( window.location.pathname === "/login" || window.location.pathname === "/signup" || !Cookies.get( `theme` ) ? null : <BottomMenu /> ) }
+            </div>
+
         </>
     )
 }

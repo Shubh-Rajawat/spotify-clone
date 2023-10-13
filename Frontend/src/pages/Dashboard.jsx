@@ -1,15 +1,99 @@
 import React from 'react'
 import Card from '../components/Card'
 import HeaderDash from '../components/HeaderDash'
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+import Cookies from "js-cookie"
+import { useNavigate } from 'react-router-dom';
+var settings = {
+    dots: false,
+    infinite: false,
+    speed: 300,
+    slidesToShow: 7,
+    slidesToScroll: 2,
+};
+const responsiveOptions = [
+    {
+        breakpoint: 1024,
+        settings: {
+            slidesToShow: 4,
+            slidesToScroll: 4,
+            infinite: true,
+            dots: true
+        }
+    },
+    {
+        breakpoint: 600,
+        settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2
+        }
+    },
+    {
+        breakpoint: 480,
+        settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1
+        }
+    }
 
+]
 const Dashboard = () => {
+
+    const songs = [ "https://seed-mix-image.spotifycdn.com/v6/img/two_thousands/1wRPtKGflJrBx9BmLsSwlU/en/default",
+     "https://dailymix-images.scdn.co/v2/img/ab6761610000e5eb339fc4fb0bf1ddd5cd420d60/2/en/default",
+       "https://i.scdn.co/image/ab67706f00000002fc469bf0981d8eb81e543501",
+        "https://dailymix-images.scdn.co/v2/img/ab6761610000e5eb339fc4fb0bf1ddd5cd420d60/2/en/default",
+         "https://i.scdn.co/image/ab67706f00000002fc469bf0981d8eb81e543501",
+           "https://dailymix-images.scdn.co/v2/img/ab6761610000e5eb339fc4fb0bf1ddd5cd420d60/2/en/default",
+         ]
+    const LofiSongs = [ "https://i.scdn.co/image/ab67616100005174911da8f9029930fda9637859",
+    "https://i.scdn.co/image/ab67616d00001e02bdc5d584eb42858552efb6be",
+    "https://i.scdn.co/image/ab67616d00001e02777bef4f76be16d559da6ef5",
+    "https://i.scdn.co/image/ab67616d00001e02bdc5d584eb42858552efb6be",
+    "https://i.scdn.co/image/ab67706f00000002fc469bf0981d8eb81e543501",
+    "https://i.scdn.co/image/ab67706f00000002fc469bf0981d8eb81e543501",
+    "https://i.scdn.co/image/ab67616d00001e02777bef4f76be16d559da6ef5",
+    "https://i.scdn.co/image/ab67616100005174911da8f9029930fda9637859",
+         ]
+    const navigate = useNavigate();
+    if(!Cookies.get('theme')){
+        navigate('/login')
+        return false
+    }
     return (
        <>
-            <div className="w-full h-screen bg-black p-2 rounded-xl overflow-hidden">
+            <div className="w-full h-screen bg-black p-2 rounded-xl overflow-scroll" style={{
+                paddingBottom: "81px"
+            }}>
                <HeaderDash />
-                <div className="p-2 rounded-xl main w-full h-auto py-3 bg-zinc-900 
-                overflow-auto ">
-                 <Card />
+                <div className=" px-8 rounded-xl main w-full h-auto py-3 bg-zinc-900 
+                overflow-auto mx-auto ">
+                    <div className="main break-after-column p-3 py-5 text-start ">
+                        <h1 className='text-start text-2xl font-bold'>Hip-Hop</h1>
+                        {songs?.map((item , index)=>{
+                            return(
+                                <Card data={item} />
+                            )
+                        })}
+                    </div>     
+                    <div className="main break-after-column p-3 py-5 text-start ">
+                        <h1 className='text-start text-2xl font-bold'>Lofi</h1>
+                        { LofiSongs?.map((item , index)=>{
+                            return(
+                                <Card data={item} />
+                            )
+                        })}
+                    </div>     
+                    <div className="main break-after-column p-3 py-5 text-start ">
+                        <h1 className='text-start text-2xl font-bold'>Hollywood</h1>
+                        { songs?.map( ( item, index ) => {
+                            return (
+                                <Card data={item} />
+                            )
+                        } ) }
+                    </div> 
              </div>
             </div>
             <div>
@@ -22,14 +106,14 @@ const Dashboard = () => {
 export default Dashboard
 
 
-    // < div className = 'bg-black w-full p-2' >
+    // < div className = 'bg-black w-full p-2'>
     //     <div className="dashboard-wrapper 
     //         bg-gradient-to-r from-green-900 to-black
     //         rounded-lg w-full h-full">
     //         <header className="bg-teal-950/25 py-1 flex 2xl:gap-x-96 lg:gap-x-72  md:gap-x-14">
     //             <div className="navigate  2xl:me-96 xl:me-42 lg:me-30 md:me-16 sm:me-18  py-1">
-    //                 <i className="fa-solid fa-angle-left bg-black/50 rounded-full px-3 py-1 ms-2 text-xl "  ></i>
-    //                 <i className="fa-solid fa-angle-right bg-black/50 rounded-full px-3 py-1 ms-2 text-xl " ></i>
+    //                 <i className="fa-solid fa-angle-left bg-black/50 rounded-full px-3 py-1 ms-2 text-xl" ></i>
+    //                 <i className="fa-solid fa-angle-right bg-black/50 rounded-full px-3 py-1 ms-2 text-xl"></i>
     //             </div>
     //             <div className="">
     //                 <button className='bg-white text-black text-sm font-bold px-5 py-2 rounded-3xl mx-3 my-2 hover:scale-105 ' >Explore Premium</button>
@@ -45,11 +129,10 @@ export default Dashboard
     //             <Card />
     //         </div>
     //     </div>
-    //     </div >
-
-
+    //     </div>
 
 
 
 // const hours = new Date().getHours()
 // const greeting = ( hours < 12 ) ? "Morning" : ( hours < 17 ) ? "Afternoon" : "Evening"
+

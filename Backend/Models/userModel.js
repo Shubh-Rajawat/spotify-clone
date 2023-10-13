@@ -1,16 +1,27 @@
-const mongoose = require( 'mongoose' );
+const mongoose = require("mongoose");
+const joi = require("joi")
 
-
-const userSchema = mongoose.Schema( {
+const userSchema = mongoose.Schema({
     name: { type: String, require: true },
     email: { type: String, require: true },
     password: { type: String, require: true },
-    dob: { type: String, require: true },
     gender: { type: String, require: true },
-    marketMsg: { type: Boolean, default: false },
-    shareData: { type: Boolean, default: false },
+    likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Song" }],
+    dob: { type: Date, require: true },
+},
+    { timestamps: true }
+)
 
-}, { timestamps: true } )
+const validate = (userSchema) => {
+    const schema = joi.object({
+        name: joi.string().min(4).required(),
+        email: joi().email().required(),
+        password: joi().string().required(),
+        gender: joi().string().valid("male", "female").required(),
+        dob: joi().string().required(),
 
-const User = mongoose.model( "User", userSchema )
-module.exports = User;
+    })
+    return schema.validate(userSchema)
+}
+const User = mongoose.model("User", userSchema)
+module.exports = { User, validate }

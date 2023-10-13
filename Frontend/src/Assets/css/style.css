@@ -77,3 +77,15 @@ input:checked+.slider:before {
 }
 
 /****************** toggle button css ends**************************************************** */
+
+
+.p-carousel-item {
+    flex: 0 100% !important;
+}
+
+.p-items-hidden {
+    visibility: visible !important;
+
+}
+
+.slick-track {}

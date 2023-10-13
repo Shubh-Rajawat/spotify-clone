@@ -1,8 +1,9 @@
-const jwtTkn = require( "jsonwebtoken" )
 
-const GenerateTkn = async ( id ) => {
-    const token = jwtTkn.sign( { id }, process.env.SECRET_KEY )
-    return token;
+const JWT = require("jsonwebtoken")
+
+const token = async (id) => {
+    const jwt = await JWT.sign({ id }, process.env.SECRET)
+    return jwt
 }
 
-module.exports = GenerateTkn;
+module.exports = token
