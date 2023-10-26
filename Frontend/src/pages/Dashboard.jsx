@@ -54,7 +54,7 @@ useEffect(()=>{
     .then(res => {
         if(res.data.status){
             setSongs(res.data.data)
-            console.log("hello",res.data.data)
+            // console.log("hello",res.data.data)
         }else{
             setSongs(null)
         }
@@ -96,7 +96,7 @@ const songData = ""
                         <h1 className='text-start text-2xl font-bold'>Hip-Hop</h1>
                         { songs?.map((item , index)=>{
                             return(
-                                <Card data={ item } img={ songs1[ index ] } />
+                                <Card data={ item } img={ songs1[ index ] } key={item?._id}/>
                             )
                         })}
                     </div>     
@@ -104,7 +104,7 @@ const songData = ""
                         <h1 className='text-start text-2xl font-bold'>Lofi</h1>
                         { songs?.map((item , index)=>{
                             return(
-                                <Card data={ item }  img={ LofiSongs[index] }  />
+                                <Card data={ item }  img={ LofiSongs[index] }  key={item?._id}/>
                             )
                         })}
                     </div>     
@@ -112,7 +112,7 @@ const songData = ""
                         <h1 className='text-start text-2xl font-bold'>Hollywood</h1>
                         { songs1?.map( ( item, index ) => {
                             return (
-                                <Card img={item} />
+                                <Card img={item} key={index}/>
                             )
                         } ) }
                     </div> 

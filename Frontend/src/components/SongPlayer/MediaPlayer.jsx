@@ -8,7 +8,7 @@ const MediaPlayer = () => {
     const { currentSong } = useSelector( ( state ) =>
         state.song
     )
-    console.log( currentSong )
+    // console.log( currentSong )
     return (
         <>
             <div className='fixed hidden bottom-0 w-full px-6 pt-2 sm:flex justify-between items-end bg-black'>

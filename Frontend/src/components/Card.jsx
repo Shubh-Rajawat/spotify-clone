@@ -11,16 +11,15 @@ const Card = ( { data, img } ) => {
     const [ audio, setAudio ] = useState( new Audio( `${ baseUrl }${ data?.audio_url }` ) );
     const [ isPlaying, setIsPlaying ] = useState( false );
 
-    const settingCurrentSong = ( songId ) => {
-        dispatch( songActions.setCurrentSong( songId ) );
-    };
+    // const settingCurrentSong = ( songId ) => {
+    //     dispatch( songActions.setCurrentSong( songId ) );
+    // };
 
     const handlePlayClick = () => {
         if ( isPlaying ) {
             audio.pause();
             setIsPlaying( false );
             dispatch( nowPlayingActions.toggleNowPlaying( false ) );
-
         } else {
             // Pause the currently playing audio (if any)
             if ( currentSong !== data?._id ) {
@@ -33,10 +32,8 @@ const Card = ( { data, img } ) => {
             audio.play();
             setIsPlaying( true );
             dispatch( nowPlayingActions.toggleNowPlaying( true ) );
-
         }
     };
-
     useEffect( () => {
         if ( currentSong !== data?._id && isPlaying ) {
             audio.pause();
