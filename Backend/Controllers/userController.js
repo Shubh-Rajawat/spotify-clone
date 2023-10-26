@@ -4,7 +4,7 @@ const token = require( "../config/token" );
 const signup = async ( req, res ) => {
     try {
         const { name, email, dob, password, gender } = req.body;
-        if ( !name || !email || !password || !dob || !gender ) {
+        if ( !name || !email || !password || !gender ) {
             res.status( 400 ).json( { msg: "All fields are required" } );
         } else {
             const existEmail = await User.findOne( { email: email } );
@@ -17,7 +17,7 @@ const signup = async ( req, res ) => {
                     const newUser = await User.create( {
                         name: name,
                         email: email,
-                        dob: dob,
+                        dob: "",
                         password: hashingpass,
                         gender: gender,
                     } );

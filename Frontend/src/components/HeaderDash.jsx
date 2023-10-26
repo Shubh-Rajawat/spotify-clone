@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import { useClickOutside } from 'primereact/hooks';
 import { Dialog } from 'primereact/dialog';
+import Cookies from 'js-cookie';
 
 const HeaderDash = () => {
     const hours = new Date().getHours()
@@ -15,7 +16,7 @@ const HeaderDash = () => {
     } );
     return (
         <>
-            <header className="bg-transparent flex  justify-between items-center z-10">
+            <header className="bg-transparent flex  justify-between items-center z-10 ">
                 <div className="">
                     <i className="fa-solid fa-angle-left bg-black/50 rounded-full px-3 py-1 my-2 mx-1 sm:mx-2 text-lg "
                         onClick={ () => {
@@ -28,7 +29,7 @@ const HeaderDash = () => {
                             navigate( +1 )
                         } }
                     ></i>
-                    <span className='select-none' >Good { greeting }</span>
+                    <span className='select-none font-bold hidden md:inline' >Good { greeting }</span>
                 </div>
                 <div className='me-2' >
                     <button className='bg-white text-black text-xs font-bold px-5 py-2 rounded-3xl  hover:scale-105 mx-2' >Explore Premium</button>
@@ -65,9 +66,12 @@ const HeaderDash = () => {
                                     </Link>
                                 </li>
                                 <li className='border-t hover:bg-[#272727] px-3 rounded-b-md'>
-                                    <Link to={ `/login` } >
+                                    <span onClick={ () => {
+                                        Cookies.remove( 'theme' );
+                                        navigate( `/login` )
+                                    } } >
                                         Logout
-                                    </Link>
+                                    </span>
                                 </li>
                             </ul>
                         </div> }

@@ -7,7 +7,7 @@ const nowPlayingSlice = createSlice( {
     },
     reducers: {
         toggleNowPlaying: ( state, action ) => {
-            state.nowPlaying = !state.nowPlaying
+            state.nowPlaying = action.payload
         }
     }
 } )

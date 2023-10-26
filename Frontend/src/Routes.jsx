@@ -11,24 +11,26 @@ import PlaylistPage from './pages/PlaylistPage';
 import { Splitter, SplitterPanel } from 'primereact/splitter';
 import Profile from './pages/Profile';
 import Cookies from 'js-cookie';
+import Signup from './pages/Signup';
 const PageRoutes = () => {
-    const { nowPlaying } = useSelector( ( state ) => state.nowPlaying );
+    const { checkPlaying } = useSelector( ( state ) => state.checkPlaying );
     const navigate = useNavigate();
     return (
         <>
 
-            <div className="flex overflow-hidden">
-                { window.location.pathname === "/login" || window.location.pathname === "/signup" || !Cookies.get( `theme` ) ? null : < div className='min-w-max' ><SideBar /></div> }
+            <div className="main-body flex overflow-hidden">
+                { window.location.pathname === "/login" || window.location.pathname === "/signup" || !Cookies.get( `theme` ) ? null : < div className='sm:min-w-[330px]' ><SideBar /></div> }
                 <Routes>
                     <Route path='/login' element={ <Login /> } />
-                    {/* <Route exact path='/' element={ !Cookies.get( `theme` ) ? <Login /> : <Dashboard /> } /> */ }
+                    <Route path='/signup' element={ <Signup /> } />
                     <Route exact path='/' element={ <Dashboard /> } />
+                    {/* <Route exact path='/' element={ <Dashboard /> } /> */ }
                     <Route path='/playlist' element={ <PlaylistPage /> } />
                     <Route path='/profile' element={ <Profile /> } />
+                    <Route path='/search' element={ <Profile /> } />
                 </Routes>
-                { nowPlaying ? <NowPlaylingView /> : null }
+                { checkPlaying ? <NowPlaylingView /> : null }
             </div>
-
             <div className="fixed bottom-0">
                 { ( window.location.pathname === "/login" || window.location.pathname === "/signup" || !Cookies.get( `theme` ) ? null : <MediaPlayer /> ) }
                 { ( window.location.pathname === "/login" || window.location.pathname === "/signup" || !Cookies.get( `theme` ) ? null : <BottomMenu /> ) }

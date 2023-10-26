@@ -1,10 +1,11 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { nowPlayingActions } from '../../redux/nowplayingSlice';
+import { checkPlayingActions } from '../../redux/checkPlayingSlice';
 
 
 const RightSongActions = () => {
-    const { showNowplaying } = useSelector( ( state ) => state.nowPlaying );
+    const { checkPlaying } = useSelector( ( state ) => state.checkPlaying );
     const dispatch = useDispatch();
     // console.log( showNowplaying, "nowplay" );
     return (
@@ -14,7 +15,7 @@ const RightSongActions = () => {
                     <i
                         className="fa-solid fa-headphones mx-3 cursor-pointer text-neutral-600 hover:text-white"
                         title="Now playing"
-                        onClick={ () => dispatch( nowPlayingActions.toggleNowPlaying() ) }
+                        onClick={ () => dispatch( checkPlayingActions.togglecheckPlaying() ) }
                     ></i>
                     <i
                         className="fa-solid fa-microphone mx-3 cursor-pointer text-neutral-600 hover:text-white"

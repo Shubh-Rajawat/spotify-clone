@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import logo from "../Assets/media/white-logo.svg"
-import google from "../Assets/media/google.svg"
-import facebook from "../Assets/media/facebook.svg"
-import apple from "../Assets/media/apple.svg"
+// import google from "../Assets/media/google.svg"
+// import facebook from "../Assets/media/facebook.svg"
+// import apple from "../Assets/media/apple.svg"
 import "../Assets/css/style.css"
 import { Link, useNavigate } from "react-router-dom"
 import { useMutation } from 'react-query'
@@ -18,9 +18,9 @@ const Login = () => {
     const mutation = useMutation( userData => {
         return axios.post( `${ baseUrl }user/login`, userData );
     }, {
-        onSuccess: () => {
-            console.log( "successfull" )
-            Cookies.set( "theme", mutation.data?.data?.token )
+        onSuccess: ( data ) => {
+            console.log( "login successfully", data )
+            Cookies.set( "theme", data?.data?.token )
             navigate( '/' );
             setUserData( {
                 email: "",
@@ -28,7 +28,6 @@ const Login = () => {
             } )
         }
     } )
-
     return (
         <>
             <div className=' login-page w-full' >
@@ -36,7 +35,7 @@ const Login = () => {
                     <div className="logo-parent">
                         <img src={ logo } alt="" className='header-logo' />
                     </div>
-                    POSTIFY
+                    SPOTIFY
                 </header>
                 <div className="login-page  bg-black my-6  max-w-full sm:max-w-xl mx-auto py-5 px-9 rounded-xl ">
                     <SocialLogin />
@@ -84,7 +83,7 @@ const Login = () => {
                     <div className="hr border-t border-gray-600 mx-auto my-4 w-3/4 "></div>
                     <div className="go-to-signup">
                         <span>
-                            Don't have an account? <Link className='underline hover:text-green-500 text-md' >Sign up for Spotify</Link>
+                            Don't have an account? <Link className='underline hover:text-green-500 text-md' to={ `/signup` } >Sign up for Spotify</Link>
                         </span>
                     </div>
                 </div>
@@ -96,7 +95,7 @@ const Login = () => {
 const SocialLogin = () => {
     return (
         <div className="continer-sm mx-auto" >
-            <h1 className='my-8 text-4xl font-bold text-center' >Login to Postify</h1>
+            <h1 className='my-8 text-4xl font-bold text-center' >Login to Spotify</h1>
             {/* <div className="google my-3  justify-center text-md p-3  flex items-center
                      border border-slate-500 rounded-3xl hover:border-current cursor-default">
                 <img src={ google } alt="" className='h-6 mx-3' />
@@ -107,7 +106,6 @@ const SocialLogin = () => {
                 <img src={ facebook } alt="" className='h-7 mx-3' />
                 Continue With Facebook
             </div>
-
             <div className="apple my-3 justify-center text-md p-3 flex items-center 
                      border border-slate-500 rounded-3xl hover:border-current cursor-default">
                 <img src={ apple } alt="" className='h-7 mx-3' />
@@ -121,4 +119,4 @@ const SocialLogin = () => {
     )
 }
 
-export default Login
+export default Login;

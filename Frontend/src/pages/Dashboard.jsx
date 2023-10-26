@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Card from '../components/Card'
 import HeaderDash from '../components/HeaderDash'
 import "slick-carousel/slick/slick.css";
@@ -6,6 +6,8 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import Cookies from "js-cookie"
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import baseUrl from '../BaseUrl';
 var settings = {
     dots: false,
     infinite: false,
@@ -40,11 +42,36 @@ const responsiveOptions = [
 
 ]
 const Dashboard = () => {
+    const navigate = useNavigate()
+const [songs , setSongs] = useState();
+useEffect(()=>{
+    let token = Cookies.get( `theme` )
+    if(!token){
+        navigate(`/signup`)
+        return;
+    }
+    axios.post( `${ baseUrl}song/getsongbygenre`)
+    .then(res => {
+        if(res.data.status){
+            setSongs(res.data.data)
+            console.log("hello",res.data.data)
+        }else{
+            setSongs(null)
+        }
+    }).catch(err => {
+        console.log(err)
+    })
+},[])
+const songData = "" 
 
-    const songs = [ "https://seed-mix-image.spotifycdn.com/v6/img/two_thousands/1wRPtKGflJrBx9BmLsSwlU/en/default",
+
+
+
+
+    const songs1 = [ "https://seed-mix-image.spotifycdn.com/v6/img/two_thousands/1wRPtKGflJrBx9BmLsSwlU/en/default",
      "https://dailymix-images.scdn.co/v2/img/ab6761610000e5eb339fc4fb0bf1ddd5cd420d60/2/en/default",
        "https://i.scdn.co/image/ab67706f00000002fc469bf0981d8eb81e543501",
-        "https://dailymix-images.scdn.co/v2/img/ab6761610000e5eb339fc4fb0bf1ddd5cd420d60/2/en/default",
+        "https://i.scdn.co/image/ab6761610000e5ebd6a28646959575873804f23e",
          "https://i.scdn.co/image/ab67706f00000002fc469bf0981d8eb81e543501",
            "https://dailymix-images.scdn.co/v2/img/ab6761610000e5eb339fc4fb0bf1ddd5cd420d60/2/en/default",
          ]
@@ -53,44 +80,39 @@ const Dashboard = () => {
     "https://i.scdn.co/image/ab67616d00001e02777bef4f76be16d559da6ef5",
     "https://i.scdn.co/image/ab67616d00001e02bdc5d584eb42858552efb6be",
     "https://i.scdn.co/image/ab67706f00000002fc469bf0981d8eb81e543501",
-    "https://i.scdn.co/image/ab67706f00000002fc469bf0981d8eb81e543501",
+    "https://dailymix-images.scdn.co/v2/img/ab6761610000e5eb8eb1daa20199cca83b30df5a/3/en/default",
     "https://i.scdn.co/image/ab67616d00001e02777bef4f76be16d559da6ef5",
     "https://i.scdn.co/image/ab67616100005174911da8f9029930fda9637859",
          ]
-    const navigate = useNavigate();
-    if(!Cookies.get('theme')){
-        navigate('/login')
-        return false
-    }
     return (
        <>
             <div className="w-full h-screen bg-black p-2 rounded-xl overflow-scroll" style={{
                 paddingBottom: "81px"
             }}>
                <HeaderDash />
-                <div className=" px-8 rounded-xl main w-full h-auto py-3 bg-zinc-900 
-                overflow-auto mx-auto ">
-                    <div className="main break-after-column p-3 py-5 text-start ">
+                <div className=" sm:pl-4 rounded-xl main w-full h-auto py-3 bg-gradient-to-t from-black/80 to-zinc-900
+ overflow-auto mx-auto  ">
+                    <div className="main break-after-column sm:pl-3 py-5 text-start ">
                         <h1 className='text-start text-2xl font-bold'>Hip-Hop</h1>
-                        {songs?.map((item , index)=>{
+                        { songs?.map((item , index)=>{
                             return(
-                                <Card data={item} />
+                                <Card data={ item } img={ songs1[ index ] } />
                             )
                         })}
                     </div>     
-                    <div className="main break-after-column p-3 py-5 text-start ">
+                    <div className="main break-after-column sm:pl-3 py-5 text-start ">
                         <h1 className='text-start text-2xl font-bold'>Lofi</h1>
-                        { LofiSongs?.map((item , index)=>{
+                        { songs?.map((item , index)=>{
                             return(
-                                <Card data={item} />
+                                <Card data={ item }  img={ LofiSongs[index] }  />
                             )
                         })}
                     </div>     
-                    <div className="main break-after-column p-3 py-5 text-start ">
+                    <div className="main break-after-column sm:pl-3 py-5 text-start ">
                         <h1 className='text-start text-2xl font-bold'>Hollywood</h1>
-                        { songs?.map( ( item, index ) => {
+                        { songs1?.map( ( item, index ) => {
                             return (
-                                <Card data={item} />
+                                <Card img={item} />
                             )
                         } ) }
                     </div> 

@@ -2,8 +2,13 @@ import React from 'react'
 import Player from './Player'
 import CurrentSong from './CurrentSong'
 import RightSongActions from './RightSongActions'
+import { useSelector } from 'react-redux'
 
 const MediaPlayer = () => {
+    const { currentSong } = useSelector( ( state ) =>
+        state.song
+    )
+    console.log( currentSong )
     return (
         <>
             <div className='fixed hidden bottom-0 w-full px-6 pt-2 sm:flex justify-between items-end bg-black'>
