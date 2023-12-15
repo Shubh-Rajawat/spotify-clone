@@ -41,6 +41,7 @@ const responsiveOptions = [
     }
 
 ]
+
 const Dashboard = () => {
     const navigate = useNavigate()
 const [songs , setSongs] = useState();
@@ -48,25 +49,19 @@ useEffect(()=>{
     let token = Cookies.get( `theme` )
     if(!token){
         navigate(`/signup`)
-        return;
+        return ;
     }
     axios.post( `${ baseUrl}song/getsongbygenre`)
     .then(res => {
         if(res.data.status){
             setSongs(res.data.data)
-            // console.log("hello",res.data.data)
         }else{
-            setSongs(null)
+            setSongs(null);
         }
     }).catch(err => {
         console.log(err)
     })
 },[])
-const songData = "" 
-
-
-
-
 
     const songs1 = [ "https://seed-mix-image.spotifycdn.com/v6/img/two_thousands/1wRPtKGflJrBx9BmLsSwlU/en/default",
      "https://dailymix-images.scdn.co/v2/img/ab6761610000e5eb339fc4fb0bf1ddd5cd420d60/2/en/default",
@@ -86,15 +81,16 @@ const songData = ""
          ]
     return (
        <>
-            <div className="w-full h-screen bg-black p-2 rounded-xl overflow-scroll" style={{
+            <div className="  w-full h-screen bg-black p-2  overflow-scroll" style={{
                 paddingBottom: "81px"
             }}>
                <HeaderDash />
                 <div className=" sm:pl-4 rounded-xl main w-full h-auto py-3 bg-gradient-to-t from-black/80 to-zinc-900
  overflow-auto mx-auto  ">
-                    <div className="main break-after-column sm:pl-3 py-5 text-start ">
+                    <div className= " main break-after-column sm:pl-3 py-5 text-start">
                         <h1 className='text-start text-2xl font-bold'>Hip-Hop</h1>
                         { songs?.map((item , index)=>{
+                            if(item?.genre === "HipHop")
                             return(
                                 <Card data={ item } img={ songs1[ index ] } key={item?._id}/>
                             )
@@ -110,11 +106,11 @@ const songData = ""
                     </div>     
                     <div className="main break-after-column sm:pl-3 py-5 text-start ">
                         <h1 className='text-start text-2xl font-bold'>Hollywood</h1>
-                        { songs1?.map( ( item, index ) => {
+                        {/* { songs1?.map( ( item, index ) => {
                             return (
                                 <Card img={item} key={index}/>
                             )
-                        } ) }
+                        } ) } */}
                     </div> 
              </div>
             </div>

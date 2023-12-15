@@ -20,7 +20,10 @@ songRouter.post( '/add-artist', upload.fields( [
     { name: "bannerimg" }
 ] ), addArtist )
 // add songs
-songRouter.post( '/add-song', upload.single( 'track' ), addSong )
+songRouter.post( '/add-song', upload.fields( [
+    { name: "track" },
+    { name: "image" }
+] ), addSong )
 // user playlist 
 songRouter.post( '/add-playlist', authinticate, upload.single( 'track' ), addPlaylist )
 

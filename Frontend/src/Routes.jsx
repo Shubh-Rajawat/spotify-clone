@@ -12,6 +12,7 @@ import { Splitter, SplitterPanel } from 'primereact/splitter';
 import Profile from './pages/Profile';
 import Cookies from 'js-cookie';
 import Signup from './pages/Signup';
+import Search from './pages/Search';
 const PageRoutes = () => {
     const { checkPlaying } = useSelector( ( state ) => state.checkPlaying );
     const navigate = useNavigate();
@@ -27,7 +28,7 @@ const PageRoutes = () => {
                     {/* <Route exact path='/' element={ <Dashboard /> } /> */ }
                     <Route path='/playlist' element={ <PlaylistPage /> } />
                     <Route path='/profile' element={ <Profile /> } />
-                    <Route path='/search' element={ <Profile /> } />
+                    <Route path='/search' element={ <Search /> } />
                 </Routes>
                 { checkPlaying ? <NowPlaylingView /> : null }
             </div>

@@ -16,6 +16,6 @@ app.get( "", ( req, res ) => {
     res.send( "Hello World I hosted my node app" );
     res.end();
 } )
-app.listen( process.env.PORT, "192.168.29.23", () => {
+app.listen( process.env.PORT, () => {
     console.log( `Server is running on port ${ process.env.PORT }` )
 } )

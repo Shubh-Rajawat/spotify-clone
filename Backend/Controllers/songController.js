@@ -4,13 +4,15 @@ const Song = require( "../Models/songs" );
 // likes should store user id
 const addSong = async ( req, res ) => {
     try {
-        const file = req.file
+        const file = req.files
+        console.log( "files", file )
         const { title, duration, artist, genre, lyrics, likes } = req.body
 
-        let song = `${ file.path }`
+        let song = `${ file.track[ 0 ].path }`
+        let image = `${ file.image[ 0 ].path }`
 
         const addSong = await Song.create( {
-            title, duration, artist, genre, lyrics, audio_url: song, likes
+            title, duration, artist, genre, lyrics, audio_url: song, likes, image
         } )
 
         if ( addSong ) {

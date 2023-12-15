@@ -67,8 +67,8 @@ const HeaderDash = () => {
                                 </li>
                                 <li className='border-t hover:bg-[#272727] px-3 rounded-b-md'>
                                     <span onClick={ () => {
-                                        Cookies.remove( 'theme' );
                                         navigate( `/login` )
+                                        Cookies.remove( 'theme' );
                                     } } >
                                         Logout
                                     </span>

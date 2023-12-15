@@ -10,8 +10,8 @@ import { BrowserRouter, useNavigate } from 'react-router-dom';
 
 
 function App() {
-
   const queryClient = new QueryClient()
+
   return (
     <PrimeReactProvider>
       <QueryClientProvider client={ queryClient }>

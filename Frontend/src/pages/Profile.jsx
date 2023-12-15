@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import HeaderDash from '../components/HeaderDash'
 
 const Profile = () => {
+
     return (
         <div className="w-full h-screen bg-gradient-to-t from-zinc-900   to-zinc-600 py-2 rounded-xl overflow-scroll">
             <HeaderDash />
@@ -10,7 +11,6 @@ const Profile = () => {
                 <UserInfo />
             </div>
             <div className='w-full'>
-
 
             </div>
         </div>
@@ -22,10 +22,10 @@ const UserInfo = () => {
         <div className="">
             <div className="playlist-banner flex gap-6 my-3 pl-4 py-4 ">
                 <div className="relative group">
-                    <div className=" relative playlist-img w-44 rounded-full overflow-hidden ">
-                        <img src="https://i.scdn.co/image/ab6761610000e5ebd6a28646959575873804f23e" alt="" />
+                    <div className="playlist-img w-44 rounded-full overflow-hidden ">
+                        <img src="https://i.scdn.co/image/ab6761610000e5ebd6a28646959575873804f23e" className='imageeff' alt="" />
                     </div>
-                    <i className="fa-solid fa-pen-to-square z-10 absolute top-24 left-[70px] text-xl text-white py-1 px-2 rounded-full bg-slate-400/75"></i>
+                    {/* <i className="fa-solid fa-pen-to-square z-10 absolute top-24 left-[70px] text-xl text-white py-1 px-2 rounded-full bg-slate-400/75"></i> */ }
                 </div>
                 <div className="playlist-desc flex justify-end flex-col">
                     <div className="">

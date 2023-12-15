@@ -3,7 +3,6 @@ import nowPlayingReducer from "./nowplayingSlice";
 import songReducer from "./songslice";
 import checkPlayingReducer from "./checkPlayingSlice";
 
-
 const store = configureStore( {
     reducer: {
         nowPlaying: nowPlayingReducer,

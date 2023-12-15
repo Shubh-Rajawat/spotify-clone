@@ -4,7 +4,7 @@ const songSchema = mongoose.Schema( {
     title: { type: String, required: true },
     duration: { type: String },
     artist: { type: mongoose.Schema.Types.ObjectId, ref: 'Artist', required: true },
-
+    image: { type: String, required: true },
     genre: { type: String },
     lyrics: { type: String },
     audio_url: { type: String, required: true },

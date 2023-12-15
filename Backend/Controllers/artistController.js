@@ -23,6 +23,7 @@ const addArtist = async ( req, res ) => {
         res.status( 500 ).json( { msg: "Server Error" } );
     }
 };
+
 // get all artist 
 const getAllArtists = async ( rew, res ) => {
     try {

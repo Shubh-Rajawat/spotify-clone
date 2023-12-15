@@ -4,57 +4,62 @@ import { songActions } from '../redux/songslice';
 import baseUrl from '../BaseUrl';
 import { nowPlayingActions } from '../redux/nowplayingSlice';
 
+
 const Card = ( { data, img } ) => {
-    const { nowPlaying } = useSelector( ( state ) => state.nowPlaying );
+    const { nowPlaying, playingAudio } = useSelector( ( state ) => state.nowPlaying );
     const { currentSong } = useSelector( ( state ) => state.song );
     const dispatch = useDispatch();
     const [ audio, setAudio ] = useState( new Audio( `${ baseUrl }${ data?.audio_url }` ) );
     const [ isPlaying, setIsPlaying ] = useState( false );
 
-    // const settingCurrentSong = ( songId ) => {
-    //     dispatch( songActions.setCurrentSong( songId ) );
-    // };
-
     const handlePlayClick = () => {
-        if ( isPlaying ) {
-            audio.pause();
-            setIsPlaying( false );
-            dispatch( nowPlayingActions.toggleNowPlaying( false ) );
-        } else {
-            // Pause the currently playing audio (if any)
-            if ( currentSong !== data?._id ) {
-                dispatch( songActions.setCurrentSong( data?._id ) );
-                // Pause the currently playing audio if it's different
-                if ( audio !== null ) {
-                    audio.pause();
-                }
-            }
-            audio.play();
-            setIsPlaying( true );
-            dispatch( nowPlayingActions.toggleNowPlaying( true ) );
-        }
+        dispatch( songActions.setCurrentSong( data ) );
+        // if ( isPlaying && nowPlaying ) {
+        //     audio.pause();
+        //     setIsPlaying( false );
+        //     dispatch( nowPlayingActions.toggleNowPlaying( false ) );
+        // } else {
+        //     // Pause the currently playing audio (if any)
+        //     if ( currentSong?._id !== data?._id ) {
+        //         dispatch( songActions.setCurrentSong( data ) );
+        //         dispatch( nowPlayingActions.setPlayingAudio( audio ) )
+        //         dispatch( nowPlayingActions.toggleNowPlaying( false ) );
+        //         // Pause the currently playing audio if it's different
+        //         if ( audio !== null ) {
+        //             audio.pause();
+        //         }
+        //     }
+        //     audio.play();
+        //     setIsPlaying( true );
+        //     dispatch( nowPlayingActions.toggleNowPlaying( true ) );
+        // }
     };
     useEffect( () => {
-        if ( currentSong !== data?._id && isPlaying ) {
-            audio.pause();
-            setIsPlaying( false );
-            dispatch( nowPlayingActions.toggleNowPlaying( false ) );
-        }
+        // if ( currentSong?._id !== data?._id && isPlaying ) {
+        //     audio.pause();
+        //     setIsPlaying( false );
+        //     dispatch( nowPlayingActions.toggleNowPlaying( false ) );
+        // }
     }, [ currentSong, data?._id, isPlaying, audio ] );
 
     return (
-        <div className='inline-block'>
-            <div className=" card hidden group w-36 sm:flex flex-col gap-3  m-2 bg-[#282828] hover:bg-neutral-700 p-2 rounded-lg">
-                <div className="cover relative h-32 w-32 overflow-hidden">
-                    <img className='rounded-lg' src={ img } alt="cover" />
-                    <div className="absolute -bottom-10  group-hover:bottom-1  bg-green-500 py-1.5 px-3 rounded-full right-1 
-                    transition-all duration-200 ease-in-out hover:scale-105 shadow-sm shadow-neutral-700 opacity-90" onClick={ () => {
+        <div className=' inline-block'>
+            <div className=" card relative hidden group w-36 sm:flex flex-col gap-3  m-2 bg-[#282828] hover:bg-neutral-700 p-2 rounded-lg"
+                onClick={ () => {
+                    handlePlayClick()
+                } }
+            >
+                { currentSong?._id == data?._id &&
+                    < div className="absolute z-10 h-3 w-3 top-0.5 animate-pulse  bg-green-400  rounded-full right-1
+                shadow-sm shadow-neutral-700 opacity-90" onClick={ () => {
                             handlePlayClick()
                         } }>
-                        <i className={ `fa-solid fa-${ isPlaying ? 'pause' : 'play' } text-black` }></i>
-                    </div>
+                        &nbsp;
+                    </div> }
+                <div className="cover relative h-32 w-32 overflow-hidden">
+                    <img className='rounded-lg' src={ img } alt="cover" />
                 </div>
-                <div className="card-content text-sm leading-5">
+                <div className="card-content text-sm leading-5 truncate">
                     <h4>{ data?.title }</h4>
                     {/* <p className='truncate text-xs'>Listen to singles now, including Supermassive black hole</p> */ }
                     <p className='truncate text-xs'>{ data?.desc }</p>
@@ -69,7 +74,7 @@ const Card = ( { data, img } ) => {
                     <h4>{ data?.title }</h4>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 
